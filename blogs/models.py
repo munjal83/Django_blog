@@ -14,7 +14,7 @@ class Topic(models.Model):
 
 class Blogpost(models.Model):
 	"""Specific blog post about a topic"""
-	blogpost = models.ForeignKey(Topic)
+	topic = models.ForeignKey(Topic)
 	title = models.CharField(max_length=160)
 	text = models.TextField()
 	date_added = models.DateTimeField(auto_now_add=True)
