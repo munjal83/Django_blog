@@ -1,0 +1,21 @@
+{% extends 'blogs/base.html' %}
+
+{% block content %}
+
+<p>Topic: {{ topic }}</p>
+
+<p>BlogPosts:</p>
+<ul>
+	{% for blogpost in blogposts %}
+		<li>
+			<p>{{ blogpost.date_added|date:'M d, Y H:i' }}</p>
+			<p>{{ blogpost.text|linebreaks }}</p>
+		</li>	
+	{% empty %}
+		<li>
+			There are no blog posts for this topic yet.
+		</li>	
+	{% endfor %}
+</ul>
+
+{% endblock content %}
