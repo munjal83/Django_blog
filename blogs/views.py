@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from .models import Topic
+from .forms import TopicForm, BlogpostForm
 # Create your views here.
 def index(request):
 	"""The home page for Blog"""
@@ -18,4 +21,37 @@ def topic(request, topic_id):
 	blogposts = topic.blogpost_set.order_by('-date_added')
 	context = {'topic': topic, 'blogposts': blogposts}
 	return render(request, 'blogs/topic.html', context)
+
+def new_topic(request):
+	"""Add a new topic"""
+	if request.method != 'POST':
+		# No data submitted; create a blank form.
+		form = TopicForm()
+	else:
+		# POST data submitted; process data
+		form = TopicForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(reverse('blogs:topics'))
+
+	context = {'form': form}
+	return render(request, 'blogs/new_topic.html', context)
+
+def new_blogpost(request, topic_id):
+	"""Add a new blogpost for a particular topic"""
+	topic = Topic.objects.get(id=topic_id)
+
+	if request.method != 'POST':
+		# No data submitted; create a blank form.
+		form = BlogpostForm()
+	else:
+		# POST data submitted; process data.
+		form =  BlogpostForm(data=request.POST)
+		if form.is_valid():
+			new_blogpost = form.save(commit=False)
+			new_blogpost.topic = topic
+			new_blogpost.save()
+			return HttpResponseRedirect(reverse('blogs:topic', args=[topic_id]))
+	context = {'topic': topic, 'form': form}
+	return render(request, 'blogs/new_blogpost.html', context)
 

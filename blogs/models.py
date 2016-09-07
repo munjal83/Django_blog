@@ -14,7 +14,7 @@ class Topic(models.Model):
 
 class Blogpost(models.Model):
 	"""Specific blog post about a topic"""
-	blogpost = models.ForeignKey(Topic)
+	topic = models.ForeignKey(Topic)
 	title = models.CharField(max_length=160)
 	text = models.TextField()
 	date_added = models.DateTimeField(auto_now_add=True)
@@ -24,4 +24,4 @@ class Blogpost(models.Model):
 
 	def __str__(self):
 		"""Return a string representation of the model."""
-		return self.text[:50] + "..."
+		return self.title
