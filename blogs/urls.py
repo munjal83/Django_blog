@@ -19,4 +19,7 @@ urlpatterns = [
 
 	# Page for adding a new blogpost
 	url(r'^new_blogpost/(?P<topic_id>\d+)/$', views.new_blogpost, name='new_blogpost'),
+
+	# Page for editing a blogpost
+	url(r'^edit_blogpost/(?P<blogpost_id>\d+)/$', views.edit_blogpost, name='edit_blogpost'),
 ]

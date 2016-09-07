@@ -13,6 +13,8 @@
 		<li>
 			<p>{{ blogpost.date_added|date:'M d, Y H:i' }}</p>
 			<p>{{ blogpost.text|linebreaks }}</p>
+			<p><a href="{% url 'blogs:edit_blogpost' blogpost.id %}">edit blogpost</a>
+</p>
 		</li>	
 	{% empty %}
 		<li>

@@ -5,6 +5,9 @@
 <p>Topic: {{ topic }}</p>
 
 <p>BlogPosts:</p>
+<p>
+	<a href="{% url 'blogs:new_blogpost' topic.id %}">add new entry</a>
+</p>
 <ul>
 {% for blogpost in blogposts %}
 	<li>
