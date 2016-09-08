@@ -50,7 +50,7 @@ def new_topic(request):
 @login_required
 def new_blogpost(request, topic_id):
 	"""Add a new blogpost for a particular topic"""
-	topic = Topic.objects.get(id=topic_id)
+	topic = get_object_or_404(Topic, id=topic_id)
 
 	if request.method != 'POST':
 		# No data submitted; create a blank form.
@@ -70,7 +70,7 @@ def new_blogpost(request, topic_id):
 @login_required
 def edit_blogpost(request, blogpost_id):
 	"""Edit an existing blogpost."""
-	blogpost = Blogpost.objects.get(id=blogpost_id)
+	blogpost = get_object_or_404(Blogpost, id=topic_id)
 	topic = blogpost.topic
 	if topic.owner != request.user:
 		raise Http404
