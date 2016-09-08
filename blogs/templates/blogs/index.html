@@ -1,4 +1,17 @@
 {% extends "blogs/base.html" %}
+
+{% block header %}
+	<div class="jumbotron">
+		<h1>Publish something today!</h1>
+	</div>
+{% endblock header %}
+
+
 {% block content %}
-<p>Blog is a blogging platform for enthusiastic writers to showcase their writing talents</p>
+	<h2>
+		<a href="{% url 'users:register' %} ">Create an account</a> to make your own Blog and create content on any topic you wish to share with you followers.
+	</h2>
+	<h2>
+		Keep publishing articles regularly to build your fan base.
+	</h2>
 {% endblock content %}

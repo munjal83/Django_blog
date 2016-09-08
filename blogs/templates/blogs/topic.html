@@ -1,26 +1,32 @@
 {% extends 'blogs/base.html' %}
 
+{% block header %}
+	<h2>{{ topic }}</h2>
+{% endblock header %}
+
 {% block content %}
 
-<p>Topic: {{ topic }}</p>
-
-<p>BlogPosts:</p>
 <p>
-	<a href="{% url 'blogs:new_blogpost' topic.id %}">add new entry</a>
+	<h4><a href="{% url 'blogs:new_blogpost' topic.id %}">add new blogpost</a></h4>
 </p>
-<ul>
 	{% for blogpost in blogposts %}
-		<li>
-			<p>{{ blogpost.date_added|date:'M d, Y H:i' }}</p>
-			<p>{{ blogpost.text|linebreaks }}</p>
-			<p><a href="{% url 'blogs:edit_blogpost' blogpost.id %}">edit blogpost</a>
-</p>
-		</li>	
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>
+					{{ blogpost.date_added|date:'M d, Y H:i' }}
+					<small>
+						<a href="{% url 'blogs:edit_blogpost' blogpost.id %}">Edit blogpost</a>
+					</small>
+				</h3>
+			</div>
+			<div class="panel-body">
+				{{ blogpost.text|linebreaks }}	
+			</div>	
+		</div><!-- panel -->		
 	{% empty %}
 		<li>
 			There are no blog posts for this topic yet.
 		</li>	
 	{% endfor %}
-</ul>
 
 {% endblock content %}

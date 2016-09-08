@@ -86,3 +86,6 @@ def edit_blogpost(request, blogpost_id):
 			return HttpResponseRedirect(reverse('blogs:topic',args=[topic.id]))
 	context = {'blogpost': blogpost, 'topic': topic, 'form': form}
 	return render(request, 'blogs/edit_blogpost.html', context)
+
+
+	
